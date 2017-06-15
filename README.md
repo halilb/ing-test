@@ -26,9 +26,9 @@ The `webapp` folder contains a minimal client implementation to connect with the
 
 ## The Assignment
 
-Use the REST API and the web socket connection to show the instruments and their prices on a web page.
+Use the REST API and the web socket connection to show the instruments and their prices on a page in a mobile app.
 The prices should automatically update and highlight on update.
-You could use Angular or React for this.
+You should use React-Native for this.
 
 Approach this assignment as if you're at a client project implementing a Minimum Viable Product which is going to be shipped the current sprint.
 Code Quality is more important than features. There are bonus points for creating a stunning user interface.
