@@ -1,9 +1,14 @@
-import { action, computed, observable, useStrict } from 'mobx';
+import { action, computed, observable, runInAction, useStrict } from 'mobx';
 import Instrument from '../models/Instrument';
 
+// allow mutations only in @action blocks
 useStrict(true);
 
 export default class InstrumentsStore {
+  /*
+   * The helper reference that'll manage API requests for us
+   */
+  transportLayer = null;
   /*
    * main list that holds Instrument instances
    */
@@ -15,23 +20,44 @@ export default class InstrumentsStore {
    */
   @observable lastPriceFetchDate = null;
 
-  constructor() {
+  constructor(transportLayer) {
+    this.transportLayer = transportLayer;
     this.instruments = [];
     this.lastPriceFetchDate = new Date();
 
-    this.createDummyInstrument();
-    setInterval(this.updateDummyPrices, 1000);
+    this.loadInstruments();
+    this.transportLayer.initializeSocket(this.updateInstrumentPrice);
   }
 
-  @action updateDummyPrices = () => {
-    const firstInstrument = this.instruments[0];
-    firstInstrument.price = Math.random();
-    this.lastPriceFetchDate = new Date();
+  // moves amount and when properties to the top level
+  parseInstrumentData = data => {
+    const { code, price } = data;
+    const { amount, when } = price;
+    return { code, amount, when };
   };
 
-  @action createDummyInstrument = () => {
-    const newInstrument = new Instrument('test', 30);
-    this.instruments.push(newInstrument);
+  @action updateInstrumentPrice = data => {
+    const { code, amount, when } = this.parseInstrumentData(data);
+    const instrument = this.instruments.find(i => i.code === data.code);
+
+    if (instrument) {
+      instrument.price = amount;
+      instrument.lastPriceTime = when;
+      this.lastPriceFetchDate = new Date();
+    }
+  };
+
+  @action loadInstruments = async () => {
+    const data = await this.transportLayer.fetchInstruments();
+    const newInstruments = data.map(d => {
+      const { code, amount, when } = this.parseInstrumentData(d);
+      return new Instrument(code, amount, when);
+    });
+
+    runInAction('update instrument list after fetching network data', () => {
+      this.instruments.replace(newInstruments);
+      this.lastPriceFetchDate = new Date();
+    });
   };
 
   // using dataSource to normalize observable array

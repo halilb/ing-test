@@ -16,9 +16,16 @@ export default class Instrument {
    */
   price = null;
 
-  constructor(code, price) {
+  /*
+   * price update time,
+   * provided by the API.
+   */
+  lastPriceTime = null;
+
+  constructor(code, price, lastPriceTime) {
     this.code = code;
     this.initialPrice = price;
     this.price = price;
+    this.lastPriceTime = lastPriceTime;
   }
 }
