@@ -1,7 +1,3 @@
-import { observable, useStrict } from 'mobx';
-
-useStrict(true);
-
 export default class Instrument {
   /**
    * code is the unique identifier for the instrument.
@@ -18,7 +14,7 @@ export default class Instrument {
   /*
    * current price of the instrument.
    */
-  @observable price = null;
+  price = null;
 
   constructor(code, price) {
     this.code = code;

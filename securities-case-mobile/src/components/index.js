@@ -1,4 +1,4 @@
-import InstrumentRow from './InstrumentRow';
+import InstrumentList from './InstrumentList';
 import ToolBar from './ToolBar';
 
-export { InstrumentRow, ToolBar };
+export { InstrumentList, ToolBar };
