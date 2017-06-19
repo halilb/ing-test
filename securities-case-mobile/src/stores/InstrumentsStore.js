@@ -15,15 +15,14 @@ export default class InstrumentsStore {
   @observable instruments = null;
 
   /*
-   * this is used to display the latest price fetching date.
-   * it can also be used to display a warning when price data is stale.
+   * this is used to calculate priceFetchDiffSeconds
    */
-  @observable lastPriceFetchDate = null;
+  @observable lastPriceFetchTime = null;
 
   constructor(transportLayer) {
     this.transportLayer = transportLayer;
     this.instruments = [];
-    this.lastPriceFetchDate = new Date();
+    this.lastPriceFetchTime = Date.now();
 
     this.loadInstruments();
     this.transportLayer.initializeSocket(this.updateInstrumentPrice);
@@ -43,7 +42,7 @@ export default class InstrumentsStore {
     if (instrument) {
       instrument.price = amount;
       instrument.lastPriceTime = when;
-      this.lastPriceFetchDate = new Date();
+      this.lastPriceFetchTime = Date.now();
     }
   };
 
@@ -56,18 +55,23 @@ export default class InstrumentsStore {
 
     runInAction('update instrument list after fetching network data', () => {
       this.instruments.replace(newInstruments);
-      this.lastPriceFetchDate = new Date();
+      this.lastPriceFetchTime = Date.now();
     });
   };
 
   // using dataSource to normalize observable array
   @computed get dataSource() {
     // updating an instrument instance price does not invoke this block weirdly.
-    // so, I'm adding lastPriceFetchDate reference here as an ugly hack to invoke this.
+    // so, I'm adding lastPriceFetchTime reference here as an ugly hack to invoke this.
     // one other solution is to recreate Instrument instance when price changes,
     // and I think that's even uglier.
     // I hope to change this when I find a better way.
-    console.log(this.lastPriceFetchDate);
+    console.log(this.lastPriceFetchTime);
     return this.instruments.slice();
+  }
+
+  // used to display an information message whether the prices are up to date or not
+  @computed get priceFetchDiffSeconds() {
+    return (this.lastPriceFetchTime - Date.now()) / 1000;
   }
 }

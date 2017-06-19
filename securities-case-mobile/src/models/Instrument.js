@@ -1,3 +1,5 @@
+import { computed } from 'mobx';
+
 export default class Instrument {
   /**
    * code is the unique identifier for the instrument.
@@ -19,6 +21,7 @@ export default class Instrument {
   /*
    * price update time,
    * provided by the API.
+   * not used in the UI currently.
    */
   lastPriceTime = null;
 
@@ -27,5 +30,15 @@ export default class Instrument {
     this.initialPrice = price;
     this.price = price;
     this.lastPriceTime = lastPriceTime;
+  }
+
+  // displayed price
+  @computed get roundedPrice() {
+    return Math.round(this.price * 100) / 100;
+  }
+
+  @computed get priceDiffPercentage() {
+    const diff = this.price - this.initialPrice;
+    return Math.round(diff * 100) / 100;
   }
 }

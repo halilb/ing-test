@@ -3,36 +3,40 @@ import { FlatList, View } from 'react-native';
 import { PropTypes } from 'prop-types';
 
 import InstrumentRow from './InstrumentRow';
+import RowSeparator from './RowSeparator';
 
 export default class InstrumentList extends PureComponent {
   static propTypes = {
     instruments: PropTypes.array,
+    style: View.propTypes.style,
   };
 
   keyExtractor = item => item.code;
 
   renderItem = ({ item }) => {
+    const { code, roundedPrice, priceDiffPercentage } = item;
     return (
       <InstrumentRow
-        key={`instrument_${item.code}`}
-        id={item.code}
-        code={item.code}
-        price={item.price}
+        key={`instrument_${code}`}
+        id={code}
+        code={code}
+        price={roundedPrice}
+        priceDiffPercentage={priceDiffPercentage}
       />
     );
   };
 
   render() {
-    const { instruments } = this.props;
+    const { style, instruments } = this.props;
 
     return (
-      <View>
-        <FlatList
-          keyExtractor={this.keyExtractor}
-          data={instruments}
-          renderItem={this.renderItem}
-        />
-      </View>
+      <FlatList
+        style={style}
+        keyExtractor={this.keyExtractor}
+        data={instruments}
+        renderItem={this.renderItem}
+        ItemSeparatorComponent={RowSeparator}
+      />
     );
   }
 }
