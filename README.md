@@ -1,57 +1,19 @@
 # Securities-Case
 
-This project is used as assignment when selecting new hires at ING Securities and Private Banking.
+## securities-case-mobile
 
-Build this project by;
+`securities-case-mobile` implements a basic react native client that fetches `/instruments` and price updates through a websocket connection.
 
-    $ mvn clean install
-	$ cd securities-case-web
-	$ mvn spring-boot:run
+### Installation
+* `cd securities-case-mobile && npm install`
+* `react-native run-ios`
 
-## Main subprojects
+Make sure `securities-case-web` project is running. You need to edit `BASE_URL` in `src/helpers/TransportLayer.js` if you want to deploy the application to a device.
 
-### securities-case-service
+### Tests
+* Type `npm test` to run all the tests.
+* You may also run `./node_modules/jest/bin/jest.js --coverage` to see the test coverage.
 
-`securities-case-services` implements the services for this application and contains its domain model.
-The domain model is simple. There are is an Instrument class and a Price class. An instrument has a code and price.
-A price has a timestamp and an amount. The services module contains the `InstrumentService` (spring component) which can be used to retrieve all instruments with their latest prices. It is also possible to register a InstrumentListener which will callback in case a price of an instrument is updated.
-To simulate real instrument price updates a spring scheduler is used which randomly updates prices every second and triggers the callback.
-
-
-### securities-case-web
-
-`securities-case-web` implements a REST API to retrieve the instrument list `/instruments` and contains a websocket to retrieve updates of instrument prices.
-
-The `webapp` folder contains a minimal client implementation to connect with the web socket as an example.
-
-## The Assignment
-
-Use the REST API and the web socket connection to show the instruments and their prices on a page in a mobile app.
-The prices should automatically update and highlight on update.
-You should use React-Native for this.
-
-Approach this assignment as if you're at a client project implementing a Minimum Viable Product which is going to be shipped the current sprint.
-Code Quality is more important than features. There are bonus points for creating a stunning user interface.
-
-Please add a short README file to explain how we can run your solution.
-You can also use this README to document assumptions, caveats or anything else you would like to explain.
-
-We expect that you’ll need about 3 to 5 hours for the assessment.
-If you're running out of time, let us know what you wanted to do, but didn't have time for.
-
-**NOTE**: Please do not use a generator (like yeoman),
-because then it is very difficult for us to determine what you have written yourself and what parts are generated.
-
-We judge the solution on:
-
-- the overall approach you took to the assignment
-- the architecture of the solution and the technologies used
-- your solution for the use case
-
-I you have any questions, don't hesitate to ask them at rob.faber@ing.nl, jan.heijmans@ing.nl or jens.panneel@ing.nl.
-
-Good luck with the assignment!
-
-## Solution
-
-Clone this repository (do not fork), make a branch and create a pull request.
+### Problems
+* SockJS didn't run on Android out of the box. I tried few tricks to fix but couldn't come up with a soluton.
+* There are two errors when you run a test. Both are related to react-native version 0.45.1, and they'll probably be gone in the next release: https://github.com/facebook/react-native/pull/14370
