@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a row separator correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "rgb(200, 199, 204)",
+      "height": 0.5,
+      "marginLeft": 8,
+    }
+  }
+/>
+`;

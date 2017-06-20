@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "paddingHorizontal": 0,
+      "paddingVertical": 8,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "flex": 1,
+        "fontWeight": "bold",
+      }
+    }
+  >
+    Ing
+  </Text>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 0,
+        "flexDirection": "row",
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#B8B8B8",
+          "marginRight": 8,
+        }
+      }
+    >
+      10.44
+    </Text>
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 2,
+            "paddingVertical": 2,
+            "width": 52,
+          },
+          Object {
+            "backgroundColor": "#F1374A",
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 12,
+          }
+        }
+      >
+        -0.41
+        %
+      </Text>
+    </View>
+  </View>
+</View>
+`;

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList } from 'react-native';
 import { PropTypes } from 'prop-types';
 
 import InstrumentRow from './InstrumentRow';
@@ -7,8 +7,7 @@ import RowSeparator from './RowSeparator';
 
 export default class InstrumentList extends PureComponent {
   static propTypes = {
-    instruments: PropTypes.array,
-    style: View.propTypes.style,
+    instruments: PropTypes.array.isRequired,
   };
 
   keyExtractor = item => item.code;

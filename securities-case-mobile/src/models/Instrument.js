@@ -38,7 +38,7 @@ export default class Instrument {
   }
 
   @computed get priceDiffPercentage() {
-    const diff = this.price - this.initialPrice;
-    return Math.round(diff * 100) / 100;
+    const percentage = this.price / this.initialPrice * 100 - 100;
+    return Math.round(percentage * 100) / 100;
   }
 }

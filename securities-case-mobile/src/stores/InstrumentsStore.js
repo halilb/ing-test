@@ -19,10 +19,10 @@ export default class InstrumentsStore {
    */
   @observable lastPriceFetchTime = null;
 
-  constructor(transportLayer) {
+  constructor(transportLayer, lastPriceFetchTime) {
     this.transportLayer = transportLayer;
     this.instruments = [];
-    this.lastPriceFetchTime = Date.now();
+    this.lastPriceFetchTime = lastPriceFetchTime;
 
     this.loadInstruments();
     this.transportLayer.initializeSocket(this.updateInstrumentPrice);
@@ -57,6 +57,8 @@ export default class InstrumentsStore {
       this.instruments.replace(newInstruments);
       this.lastPriceFetchTime = Date.now();
     });
+
+    return newInstruments;
   };
 
   // using dataSource to normalize observable array

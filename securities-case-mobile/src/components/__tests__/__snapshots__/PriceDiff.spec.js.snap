@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a negative diff correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 2,
+        "paddingVertical": 2,
+        "width": 52,
+      },
+      Object {
+        "backgroundColor": "#F1374A",
+      },
+    ]
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 12,
+      }
+    }
+  >
+    -0.44
+    %
+  </Text>
+</View>
+`;
+
+exports[`renders a positive diff correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 2,
+        "paddingVertical": 2,
+        "width": 52,
+      },
+      Object {
+        "backgroundColor": "#55EDB5",
+      },
+    ]
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 12,
+      }
+    }
+  >
+    2.32
+    %
+  </Text>
+</View>
+`;
+
+exports[`renders zero diff correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 2,
+        "paddingVertical": 2,
+        "width": 52,
+      },
+      Object {
+        "backgroundColor": "#55EDB5",
+      },
+    ]
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 12,
+      }
+    }
+  >
+    0
+    %
+  </Text>
+</View>
+`;
